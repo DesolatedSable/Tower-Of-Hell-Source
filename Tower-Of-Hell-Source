@@ -1,9 +1,44 @@
---Tower Of Hell
-local Library2 = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
-local Window = Library2.CreateLib("Rebound - Key System", "Ocean")
+--Key Sytem
 
-local Keytab = Window:NewTab("Key System");
-local KeySection = Keytab:NewSection("Key System");
+local Library2 = loadstring(game:HttpGet("https://pastebin.com/raw/vff1bQ9F"))()
+local Window = Library2.CreateLib("Rebound | Key System", "Ocean")
+
+local Keytab = Window:NewTab("Key System")
+local KeySection = Keytab:NewSection("Key System")
+
+local ToggleTab = Window:NewTab("Toggle UI")
+local ToggleSection = ToggleTab:NewSection("Toggle UI")
+
+local function JoinNotifications()
+    game.Players.PlayerAdded:Connect(function(player)
+        local message = player.Name .. " joined the game"
+        game.StarterGui:SetCore("SendNotification", {
+            Title = tostring(player.Name) .. " joined the game",
+            Text = message,
+            Duration = 3
+        })
+    end)
+end
+
+ToggleSection:NewButton("Join Notifications", "", JoinNotifications)
+
+-- Call the function immediately to run it when the script is executed
+JoinNotifications()
+
+
+ToggleSection:NewKeybind("Toggle UI", "", Enum.KeyCode.L, function()
+    Library:ToggleUI()
+end)
+KeySection:NewButton("Get Key", "", function()
+    local madeByMeltMessage = "Key : melt"
+    game.StarterGui:SetCore("SendNotification", {
+        Title = "Key System",
+        Text = madeByMeltMessage,
+        Duration = 5,
+        Color = Color3.fromRGB(255, 165, 0),
+        Image = "https://www.example.com/image.png"
+    })
+end)
 
 KeySection:NewTextBox("Enter Key Here", "", function(key)
     loadstring(game:HttpGet("https://pastebin.com/raw/TxujRyhK"))()
@@ -11,18 +46,21 @@ KeySection:NewTextBox("Enter Key Here", "", function(key)
     if key ~= passkey then
         local message = "Make sure everything is spelled correctly"
         game.StarterGui:SetCore("SendNotification", {
-            Title = "INVALID KEY";
-            Text = message;
-            Duration = 10;
+            Title = "INVALID KEY",
+            Text = message,
+            Duration = 10,
         })
 
-        local url = "https://discordapp.com/api/webhooks/1136735869512982658/9iZFmlTN6_sMvqYdObomfvMUySGYCsYclvXxSusGHubTZTtV8OHrXnc4EpGBcAOMXdD7"
+        local url = "https://discord.com/api/webhooks/1142275063832379542/GFIKIZ9XhKIEXRaDx-89Bm8XG9gKnTb4Wv2nmzx38KFBS6RNpHRLW0SEBi7sJoSzEk-i"
         local data = {
             ["embeds"] = {
                 {
                     ["title"] = game.Players.LocalPlayer.Name .. " Invalid key. Key used: " .. key,
                     ["type"] = "rich",
                     ["color"] = tonumber(0x7269da),
+                    ["fields"] = {
+                        {["name"] = "Game Executed", ["value"] = game.GameId or "N/A", ["inline"] = true},
+                    }
                 }
             }
         }
@@ -33,16 +71,25 @@ KeySection:NewTextBox("Enter Key Here", "", function(key)
         request = http_request or request or HttpPost or syn.request
         local abcdef = {Url = url, Body = newdata, Method = "POST", Headers = headers}
         request(abcdef)
-    else
-        Library2:ToggleUI();
-        local message = "Welcome to Rebound, " .. game.Players.LocalPlayer.Name
+   else
+      Library2:ToggleUI()
+        local welcomeMessage = "Welcome to Rebound, " .. game.Players.LocalPlayer.Name
         game.StarterGui:SetCore("SendNotification", {
-            Title = "Welcome to Rebound";
-            Text = message;
-            Duration = 10;
+            Title = "Welcome to Rebound",
+            Text = welcomeMessage,
+            Duration = 10,
         })
 
-        local url = "https://discordapp.com/api/webhooks/1136735869512982658/9iZFmlTN6_sMvqYdObomfvMUySGYCsYclvXxSusGHubTZTtV8OHrXnc4EpGBcAOMXdD7"
+        local madeByMeltMessage = "Made by Melt"
+        game.StarterGui:SetCore("SendNotification", {
+            Title = "Rebound",
+            Text = madeByMeltMessage,
+            Duration = 10,
+            Color = Color3.fromRGB(255, 165, 0), -- Set the color to orange (you can use any color you want)
+            Image = "https://www.example.com/image.png" -- Replace this URL with the URL of the image you want to display
+        })
+
+        local url = "https://discord.com/api/webhooks/1142275063832379542/GFIKIZ9XhKIEXRaDx-89Bm8XG9gKnTb4Wv2nmzx38KFBS6RNpHRLW0SEBi7sJoSzEk-i"
         local data = {
             ["embeds"] = {
                 {
